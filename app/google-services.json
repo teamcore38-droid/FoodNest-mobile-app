@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "513761729394",
+    "project_id": "foodnestapp-8093a",
+    "storage_bucket": "foodnestapp-8093a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513761729394:android:7844831b67115a9a10dbeb",
+        "android_client_info": {
+          "package_name": "com.umai.foodnest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS0jFEwKu69BsKhrWbb9tW4qLTkzaH7Jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

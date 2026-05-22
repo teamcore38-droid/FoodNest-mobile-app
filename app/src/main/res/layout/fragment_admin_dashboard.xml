@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Stats Row 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tvOrders"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="48" android:textSize="28sp" android:textStyle="bold"
+                        android:textColor="@color/orange_primary"/>
+                    <TextView android:text="Orders" android:textColor="@color/gray"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tvRevenue"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="152K" android:textSize="28sp" android:textStyle="bold"
+                        android:textColor="@color/green"/>
+                    <TextView android:text="Revenue (LKR)" android:textColor="@color/gray"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Stats Row 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tvPending"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="12" android:textSize="28sp" android:textStyle="bold"
+                        android:textColor="@color/yellow"/>
+                    <TextView android:text="Pending" android:textColor="@color/gray"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" android:orientation="vertical">
+                    <TextView android:id="@+id/tvCancelled"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="3" android:textSize="28sp" android:textStyle="bold"
+                        android:textColor="@color/red"/>
+                    <TextView android:text="Cancelled" android:textColor="@color/gray"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Quick Actions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnManageMenu"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Manage Menu"
+            app:backgroundTint="@color/orange_primary"
+            android:layout_marginBottom="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViewOrders"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="View All Orders"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/orange_primary"
+            app:strokeColor="@color/orange_primary"
+            app:strokeWidth="1dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+    </LinearLayout>
+</ScrollView>

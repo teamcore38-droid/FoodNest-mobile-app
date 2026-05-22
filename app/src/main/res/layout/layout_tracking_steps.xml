@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Step 1 -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/iconStep1" android:layout_width="32dp"
+            android:layout_height="32dp" android:src="@drawable/ic_check_circle"/>
+        <View android:layout_width="2dp" android:layout_height="40dp"
+            android:layout_marginStart="14dp" android:background="@color/orange_primary"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:paddingStart="12dp">
+            <TextView android:text="Order Confirmed" android:textStyle="bold" android:textSize="14sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Step 2 -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/iconStep2" android:layout_width="32dp"
+            android:layout_height="32dp" android:src="@drawable/ic_step_inactive"/>
+        <View android:id="@+id/lineStep2" android:layout_width="2dp" android:layout_height="40dp"
+            android:layout_marginStart="14dp" android:background="@color/gray_light"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:paddingStart="12dp">
+            <TextView android:text="Preparing" android:textSize="14sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Step 3 -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/iconStep3" android:layout_width="32dp"
+            android:layout_height="32dp" android:src="@drawable/ic_step_inactive"/>
+        <View android:id="@+id/lineStep3" android:layout_width="2dp" android:layout_height="40dp"
+            android:layout_marginStart="14dp" android:background="@color/gray_light"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:paddingStart="12dp">
+            <TextView android:text="On the Way" android:textSize="14sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Step 4 -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <ImageView android:id="@+id/iconStep4" android:layout_width="32dp"
+            android:layout_height="32dp" android:src="@drawable/ic_step_inactive"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical" android:paddingStart="12dp">
+            <TextView android:text="Delivered" android:textSize="14sp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
