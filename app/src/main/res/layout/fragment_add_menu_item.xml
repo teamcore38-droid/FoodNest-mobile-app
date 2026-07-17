@@ -15,6 +15,7 @@
             android:text="Add New Item"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="@color/text_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"/>
@@ -45,41 +46,65 @@
             </LinearLayout>
         </FrameLayout>
 
+        <!-- Item Name -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Item Name"
             android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/gray"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/orange_primary"
+            android:textColorHint="@color/text_secondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etItemName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:background="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Category -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Category"
             android:layout_marginBottom="12dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/gray"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/orange_primary"
+            android:textColorHint="@color/text_secondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:background="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Price -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Price (LKR)"
             android:layout_marginBottom="24dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/gray"
+            app:boxStrokeWidth="1dp"
+            app:hintTextColor="@color/orange_primary"
+            android:textColorHint="@color/text_secondary">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:background="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -87,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:text="Save Item"
+            android:textColor="@color/white"
             app:backgroundTint="@color/orange_primary"/>
     </LinearLayout>
 </ScrollView>

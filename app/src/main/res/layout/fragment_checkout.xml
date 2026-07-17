@@ -49,13 +49,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter your address"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxStrokeColor="@color/gray"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="@color/orange_primary"
+                        android:textColorHint="@color/text_secondary">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textMultiLine"
-                            android:lines="2"/>
+                            android:lines="2"
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_secondary"
+                            android:background="@null"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
