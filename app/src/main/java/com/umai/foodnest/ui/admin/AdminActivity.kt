@@ -3,7 +3,7 @@ package com.umai.foodnest.ui.admin
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import com.umai.foodnest.R
+import androidx.navigation.ui.setupWithNavController
 import com.umai.foodnest.databinding.ActivityAdminBinding
 
 class AdminActivity : AppCompatActivity() {
@@ -14,7 +14,10 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Use the correct ID from activity_admin.xml
         val navHost = supportFragmentManager
-            .findFragmentById(R.id.adminNavHostFragment) as NavHostFragment
+            .findFragmentById(com.umai.foodnest.R.id.adminNavHost) as NavHostFragment
+        val navController = navHost.navController
+        binding.adminBottomNav.setupWithNavController(navController)
     }
 }
