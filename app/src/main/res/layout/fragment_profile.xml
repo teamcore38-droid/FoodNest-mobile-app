@@ -69,6 +69,7 @@
                     <TextView android:text="📍" android:textSize="20sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     <TextView android:text="  My Addresses" android:textSize="15sp"
+                        android:textColor="@color/text_primary"
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="8dp"/>
                     <TextView android:text="›" android:textSize="20sp" android:textColor="@color/gray"
@@ -87,6 +88,7 @@
                     <TextView android:text="💳" android:textSize="20sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     <TextView android:text="  Payment Methods" android:textSize="15sp"
+                        android:textColor="@color/text_primary"
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="8dp"/>
                     <TextView android:text="›" android:textSize="20sp" android:textColor="@color/gray"
@@ -105,6 +107,7 @@
                     <TextView android:text="🔔" android:textSize="20sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     <TextView android:text="  Notifications" android:textSize="15sp"
+                        android:textColor="@color/text_primary"
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="8dp"/>
                     <TextView android:text="›" android:textSize="20sp" android:textColor="@color/gray"
@@ -123,6 +126,7 @@
                     <TextView android:text="❓" android:textSize="20sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     <TextView android:text="  Help &amp; Support" android:textSize="15sp"
+                        android:textColor="@color/text_primary"
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="8dp"/>
                     <TextView android:text="›" android:textSize="20sp" android:textColor="@color/gray"
@@ -141,6 +145,7 @@
                     <TextView android:text="🔒" android:textSize="20sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     <TextView android:text="  Privacy Policy" android:textSize="15sp"
+                        android:textColor="@color/text_primary"
                         android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="8dp"/>
                     <TextView android:text="›" android:textSize="20sp" android:textColor="@color/gray"

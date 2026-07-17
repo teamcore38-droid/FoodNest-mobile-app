@@ -1,12 +1,21 @@
 <resources>
-    <style name="Theme.FoodNest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Force Light Mode — prevents white text on white backgrounds in dark system mode -->
+    <style name="Theme.FoodNest" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/orange_primary</item>
         <item name="colorPrimaryVariant">@color/orange_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/orange_primary</item>
+        <item name="colorOnSecondary">@color/white</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="colorSurface">@color/white</item>
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorError">@color/red</item>
+        <!-- Explicit text colors so all TextViews without textColor are dark -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+        <!-- Status bar -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/white</item>
     </style>
 </resources>

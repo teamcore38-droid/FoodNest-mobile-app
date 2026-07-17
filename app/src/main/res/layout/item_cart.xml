@@ -35,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
 
             <TextView
                 android:id="@+id/tvCartPrice"
@@ -68,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
 
             <ImageButton
                 android:id="@+id/btnPlus"

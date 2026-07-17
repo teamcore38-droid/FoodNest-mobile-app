@@ -97,7 +97,10 @@
                     android:layout_height="48dp"
                     android:hint="Search restaurants or dishes..."
                     android:maxLines="1"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_secondary"
+                    android:background="@null"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Promo Banner -->
