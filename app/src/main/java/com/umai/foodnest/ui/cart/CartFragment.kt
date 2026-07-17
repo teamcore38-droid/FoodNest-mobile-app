@@ -32,10 +32,10 @@ class CartFragment : Fragment() {
 
         val adapter = CartAdapter(
             onPlus = { item ->
-                // quantity handled inside adapter
+                cartViewModel.addToCart(item.foodItem)   // ✅ was empty before
             },
             onMinus = { item ->
-                if (item.quantity <= 1) cartViewModel.removeFromCart(item.foodItem)
+                cartViewModel.decreaseQuantity(item.foodItem)  // ✅ handles qty>1 AND removal
             }
         )
 
@@ -43,7 +43,8 @@ class CartFragment : Fragment() {
         binding.rvCartItems.adapter = adapter
 
         cartViewModel.cartItems.observe(viewLifecycleOwner) { items ->
-            adapter.submitList(items)
+            // Submit a NEW list copy so DiffUtil always compares distinct objects
+            adapter.submitList(items.toList())
             val isEmpty = items.isEmpty()
             binding.emptyState.visibility = if (isEmpty) View.VISIBLE else View.GONE
             binding.rvCartItems.visibility = if (isEmpty) View.GONE else View.VISIBLE

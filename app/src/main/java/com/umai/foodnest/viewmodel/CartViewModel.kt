@@ -17,27 +17,35 @@ class CartViewModel : ViewModel() {
     val cartCount: LiveData<Int> = _cartCount
 
     fun addToCart(foodItem: FoodItem) {
-        val list = _cartItems.value ?: mutableListOf()
-        val existing = list.find { it.foodItem.id == foodItem.id }
-        if (existing != null) existing.quantity++
-        else list.add(CartItem(foodItem, 1))
+        val list = _cartItems.value?.toMutableList() ?: mutableListOf()
+        val idx = list.indexOfFirst { it.foodItem.id == foodItem.id }
+        if (idx >= 0) {
+            // Create a NEW CartItem so DiffCallback detects the change
+            list[idx] = CartItem(list[idx].foodItem, list[idx].quantity + 1)
+        } else {
+            list.add(CartItem(foodItem, 1))
+        }
         _cartItems.value = list
         updateTotals()
     }
 
     fun removeFromCart(foodItem: FoodItem) {
-        val list = _cartItems.value ?: mutableListOf()
+        val list = _cartItems.value?.toMutableList() ?: mutableListOf()
         list.removeAll { it.foodItem.id == foodItem.id }
         _cartItems.value = list
         updateTotals()
     }
 
     fun decreaseQuantity(foodItem: FoodItem) {
-        val list = _cartItems.value ?: mutableListOf()
-        val item = list.find { it.foodItem.id == foodItem.id }
-        if (item != null) {
-            if (item.quantity > 1) item.quantity--
-            else list.remove(item)
+        val list = _cartItems.value?.toMutableList() ?: mutableListOf()
+        val idx = list.indexOfFirst { it.foodItem.id == foodItem.id }
+        if (idx >= 0) {
+            if (list[idx].quantity > 1) {
+                // Create a NEW CartItem so DiffCallback detects the change
+                list[idx] = CartItem(list[idx].foodItem, list[idx].quantity - 1)
+            } else {
+                list.removeAt(idx)
+            }
         }
         _cartItems.value = list
         updateTotals()
@@ -56,4 +64,4 @@ class CartViewModel : ViewModel() {
 
     fun getItemCount(foodItem: FoodItem): Int =
         _cartItems.value?.find { it.foodItem.id == foodItem.id }?.quantity ?: 0
-}
+}
