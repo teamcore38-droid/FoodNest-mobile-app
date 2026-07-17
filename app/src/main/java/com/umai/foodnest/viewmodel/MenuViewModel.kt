@@ -11,21 +11,22 @@ class MenuViewModel : ViewModel() {
     private val _restaurant = MutableLiveData<Restaurant>()
     val restaurant: LiveData<Restaurant> = _restaurant
 
-    private val _menuItems = MutableLiveData<List<FoodItem>>()
-    val menuItems: LiveData<List<FoodItem>> = _menuItems
-
+    private val _allItems = MutableLiveData<List<FoodItem>>()
     private val _filteredItems = MutableLiveData<List<FoodItem>>()
     val filteredItems: LiveData<List<FoodItem>> = _filteredItems
+
+    val categories: List<String> get() =
+        listOf("All") + (_allItems.value?.map { it.category }?.distinct() ?: emptyList())
 
     fun loadMenu(restaurantId: Int) {
         _restaurant.value = SampleData.restaurants.find { it.id == restaurantId }
         val items = SampleData.menuItems[restaurantId] ?: emptyList()
-        _menuItems.value = items
+        _allItems.value = items
         _filteredItems.value = items
     }
 
     fun filterByCategory(category: String) {
-        _filteredItems.value = if (category == "All") _menuItems.value
-        else _menuItems.value?.filter { it.category == category }
+        _filteredItems.value = if (category == "All") _allItems.value
+        else _allItems.value?.filter { it.category == category }
     }
 }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.umai.foodnest.R
+import com.umai.foodnest.data.SampleData
 import com.umai.foodnest.databinding.FragmentHomeBinding
 import com.umai.foodnest.viewmodel.HomeViewModel
 
@@ -19,8 +20,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: RestaurantAdapter
-
-    private val categories = listOf("All", "Fast Food", "Pizza", "Cafe", "Sandwiches")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -34,13 +33,15 @@ class HomeFragment : Fragment() {
         setupChips()
         setupSearch()
         observeData()
+
+        binding.ivNotification.setOnClickListener {
+            findNavController().navigate(R.id.notificationsFragment)
+        }
     }
 
     private fun setupRecyclerView() {
         adapter = RestaurantAdapter { restaurant ->
-            val bundle = android.os.Bundle().apply {
-                putInt("restaurantId", restaurant.id)
-            }
+            val bundle = Bundle().apply { putInt("restaurantId", restaurant.id) }
             findNavController().navigate(R.id.action_home_to_menu, bundle)
         }
         binding.rvRestaurants.layoutManager = LinearLayoutManager(context)
@@ -48,14 +49,31 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupChips() {
-        categories.forEach { cat ->
+        SampleData.categories.forEach { (name, emoji) ->
             val chip = Chip(context).apply {
-                text = cat
+                text = "$emoji $name"
                 isCheckable = true
-                isChecked = cat == "All"
+                isChecked = name == "All"
+                chipBackgroundColor = android.content.res.ColorStateList.valueOf(
+                    if (name == "All") requireContext().getColor(R.color.orange_primary)
+                    else requireContext().getColor(R.color.white)
+                )
+                setTextColor(
+                    if (name == "All") requireContext().getColor(R.color.white)
+                    else requireContext().getColor(R.color.text_primary)
+                )
             }
             chip.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) viewModel.loadRestaurants(category = cat)
+                if (isChecked) {
+                    chip.chipBackgroundColor = android.content.res.ColorStateList.valueOf(
+                        requireContext().getColor(R.color.orange_primary))
+                    chip.setTextColor(requireContext().getColor(R.color.white))
+                    viewModel.loadRestaurants(category = name)
+                } else {
+                    chip.chipBackgroundColor = android.content.res.ColorStateList.valueOf(
+                        requireContext().getColor(R.color.white))
+                    chip.setTextColor(requireContext().getColor(R.color.text_primary))
+                }
             }
             binding.chipGroup.addView(chip)
         }
@@ -73,8 +91,5 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun onDestroyView() { super.onDestroyView(); _binding = null }
 }

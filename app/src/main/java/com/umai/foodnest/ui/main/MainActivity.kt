@@ -19,20 +19,17 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHost.navController
-
         binding.bottomNav.setupWithNavController(navController)
 
-        // Hide bottom nav on auth screens
-        val hideOnScreens = setOf(
-            R.id.loginFragment,
-            R.id.registerFragment,
-            R.id.checkoutFragment,
-            R.id.trackingFragment,
+        val hideOn = setOf(
+            R.id.loginFragment, R.id.registerFragment,
+            R.id.menuFragment, R.id.cartFragment,
+            R.id.checkoutFragment, R.id.trackingFragment,
             R.id.reviewFragment
         )
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener { _, dest, _ ->
             binding.bottomNav.visibility =
-                if (destination.id in hideOnScreens) View.GONE else View.VISIBLE
+                if (dest.id in hideOn) View.GONE else View.VISIBLE
         }
     }
 }

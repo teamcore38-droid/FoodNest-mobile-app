@@ -17,10 +17,8 @@ class OrdersFragment : Fragment() {
     private val binding get() = _binding!!
     private val orderViewModel: OrderViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         _binding = FragmentOrdersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,15 +29,15 @@ class OrdersFragment : Fragment() {
 
         val adapter = OrderAdapter(
             onTrack = { order ->
-                val bundle = Bundle().apply {
-                    putString("orderId", order.id)
-                }
-                findNavController().navigate(
-                    R.id.action_orders_to_tracking, bundle
-                )
+                val bundle = Bundle().apply { putString("orderId", order.id) }
+                findNavController().navigate(R.id.action_orders_to_tracking, bundle)
             },
-            onReorder = { order ->
+            onReorder = {
                 findNavController().navigate(R.id.homeFragment)
+            },
+            onReview = { order ->
+                val bundle = Bundle().apply { putString("orderId", order.id) }
+                findNavController().navigate(R.id.action_orders_to_review, bundle)
             }
         )
 
@@ -50,11 +48,10 @@ class OrdersFragment : Fragment() {
             adapter.submitList(orders)
             binding.emptyState.visibility =
                 if (orders.isEmpty()) View.VISIBLE else View.GONE
+            binding.rvOrders.visibility =
+                if (orders.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun onDestroyView() { super.onDestroyView(); _binding = null }
 }

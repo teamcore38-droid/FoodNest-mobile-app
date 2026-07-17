@@ -7,7 +7,6 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.umai.foodnest.databinding.ActivitySplashBinding
 import com.umai.foodnest.ui.main.MainActivity
-
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
 

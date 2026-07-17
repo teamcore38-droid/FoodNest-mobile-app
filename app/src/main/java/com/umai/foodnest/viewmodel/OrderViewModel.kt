@@ -14,23 +14,16 @@ class OrderViewModel : ViewModel() {
     private val _currentOrder = MutableLiveData<Order>()
     val currentOrder: LiveData<Order> = _currentOrder
 
-    private val _orderStatus = MutableLiveData<OrderStatus>()
-    val orderStatus: LiveData<OrderStatus> = _orderStatus
-
-    init { _orders.value = SampleData.sampleOrders }
+    init { loadOrders() }
 
     fun loadOrders() { _orders.value = SampleData.sampleOrders }
 
-    fun setCurrentOrder(order: Order) {
+    fun setCurrentOrder(order: Order) { _currentOrder.value = order }
+
+    fun placeOrder(order: Order) {
+        val list = _orders.value?.toMutableList() ?: mutableListOf()
+        list.add(0, order)
+        _orders.value = list
         _currentOrder.value = order
-        _orderStatus.value = order.status
     }
-
-    fun getActiveOrders() = _orders.value?.filter {
-        it.status != OrderStatus.DELIVERED && it.status != OrderStatus.CANCELLED
-    } ?: emptyList()
-
-    fun getPastOrders() = _orders.value?.filter {
-        it.status == OrderStatus.DELIVERED || it.status == OrderStatus.CANCELLED
-    } ?: emptyList()
 }

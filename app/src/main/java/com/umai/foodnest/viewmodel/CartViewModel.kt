@@ -1,28 +1,59 @@
 package com.umai.foodnest.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
-import com.umai.foodnest.data.local.AppDatabase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.umai.foodnest.data.model.CartItem
 import com.umai.foodnest.data.model.FoodItem
-import com.umai.foodnest.data.repository.CartRepository
-import kotlinx.coroutines.launch
 
-class CartViewModel(application: Application) : AndroidViewModel(application) {
-    private val repo = CartRepository(AppDatabase.getInstance(application))
+class CartViewModel : ViewModel() {
+    private val _cartItems = MutableLiveData<MutableList<CartItem>>(mutableListOf())
+    val cartItems: LiveData<MutableList<CartItem>> = _cartItems
 
-    val cartItems = repo.getCartItems().asLiveData()
-    val cartCount = repo.getCartCount().asLiveData()
-    val cartTotal = repo.getCartTotal().asLiveData()
+    private val _cartTotal = MutableLiveData(0.0)
+    val cartTotal: LiveData<Double> = _cartTotal
 
-    fun addToCart(foodItem: FoodItem) = viewModelScope.launch {
-        repo.addToCart(foodItem)
+    private val _cartCount = MutableLiveData(0)
+    val cartCount: LiveData<Int> = _cartCount
+
+    fun addToCart(foodItem: FoodItem) {
+        val list = _cartItems.value ?: mutableListOf()
+        val existing = list.find { it.foodItem.id == foodItem.id }
+        if (existing != null) existing.quantity++
+        else list.add(CartItem(foodItem, 1))
+        _cartItems.value = list
+        updateTotals()
     }
 
-    fun removeFromCart(foodItem: FoodItem) = viewModelScope.launch {
-        repo.removeFromCart(foodItem)
+    fun removeFromCart(foodItem: FoodItem) {
+        val list = _cartItems.value ?: mutableListOf()
+        list.removeAll { it.foodItem.id == foodItem.id }
+        _cartItems.value = list
+        updateTotals()
     }
 
-    fun clearCart() = viewModelScope.launch { repo.clearCart() }
+    fun decreaseQuantity(foodItem: FoodItem) {
+        val list = _cartItems.value ?: mutableListOf()
+        val item = list.find { it.foodItem.id == foodItem.id }
+        if (item != null) {
+            if (item.quantity > 1) item.quantity--
+            else list.remove(item)
+        }
+        _cartItems.value = list
+        updateTotals()
+    }
+
+    fun clearCart() {
+        _cartItems.value = mutableListOf()
+        updateTotals()
+    }
+
+    private fun updateTotals() {
+        val list = _cartItems.value ?: mutableListOf()
+        _cartTotal.value = list.sumOf { it.totalPrice }
+        _cartCount.value = list.sumOf { it.quantity }
+    }
+
+    fun getItemCount(foodItem: FoodItem): Int =
+        _cartItems.value?.find { it.foodItem.id == foodItem.id }?.quantity ?: 0
 }

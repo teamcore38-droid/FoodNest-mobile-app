@@ -6,49 +6,57 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.umai.foodnest.R
 import com.umai.foodnest.data.model.Restaurant
 import com.umai.foodnest.databinding.ItemRestaurantBinding
 
 class RestaurantAdapter(
-    private val onClickListener: (Restaurant) -> Unit
+    private val onClick: (Restaurant) -> Unit
 ) : ListAdapter<Restaurant, RestaurantAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(private val binding: ItemRestaurantBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(restaurant: Restaurant) {
-            binding.tvName.text = restaurant.name
-            binding.tvRating.text = "⭐ ${restaurant.rating}"
-            binding.tvRatingBadge.text = "${restaurant.rating}"
-            binding.tvDeliveryTime.text = "${restaurant.deliveryTime} min"
-            binding.tvOpen.text = if (restaurant.isOpen) "Open" else "Closed"
-            binding.tvOpen.setBackgroundResource(
-                if (restaurant.isOpen) com.umai.foodnest.R.drawable.bg_open_badge
-                else com.umai.foodnest.R.drawable.bg_closed_badge
-            )
+        fun bind(r: Restaurant) {
+            binding.tvName.text = r.name
+            binding.tvRatingBadge.text = r.rating.toString()
+            binding.tvCategory.text = r.category
+            binding.tvDeliveryTime.text = "${r.deliveryTime} min"
+            binding.tvDescription.text = r.description
+            binding.tvReviews.text = "${r.totalReviews} reviews"
+            binding.tvOpen.text = if (r.isOpen) "● Open" else "● Closed"
+            binding.tvOpen.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                binding.root.context.getColor(
+                    if (r.isOpen) R.color.green else R.color.red))
+
+            binding.tvDeliveryFee.text =
+                if (r.deliveryFee == 0.0) "Free Delivery" else "LKR ${r.deliveryFee.toInt()} delivery"
+            binding.tvDeliveryFee.backgroundTintList = android.content.res.ColorStateList.valueOf(
+                binding.root.context.getColor(
+                    if (r.deliveryFee == 0.0) R.color.green else R.color.orange_primary))
 
             Glide.with(binding.root)
-                .load(restaurant.imageUrl)
+                .load(r.imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade(300))
                 .centerCrop()
-                .placeholder(com.umai.foodnest.R.color.gray_light)
+                .placeholder(R.color.gray_light)
+                .error(R.color.orange_light)
                 .into(binding.ivRestaurant)
 
-            binding.root.setOnClickListener { onClickListener(restaurant) }
+            binding.root.setOnClickListener { onClick(r) }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemRestaurantBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(ItemRestaurantBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false))
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(getItem(position))
-    }
 
     class DiffCallback : DiffUtil.ItemCallback<Restaurant>() {
-        override fun areItemsTheSame(old: Restaurant, new: Restaurant) = old.id == new.id
-        override fun areContentsTheSame(old: Restaurant, new: Restaurant) = old == new
+        override fun areItemsTheSame(a: Restaurant, b: Restaurant) = a.id == b.id
+        override fun areContentsTheSame(a: Restaurant, b: Restaurant) = a == b
     }
 }
